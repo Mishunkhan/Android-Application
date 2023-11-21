@@ -129,7 +129,7 @@ public class DatabaseHjelper extends SQLiteOpenHelper {
 
     public List<Steder> listSteder() {
         getJson json = new getJson();
-        String[] send = {"https://dave3600.cs.oslomet.no/~s360680/jsonut.php", "GET"};
+        String[] send = {"https://dave3600.cs.oslomet.no/~s360680/jsonut.php","GET"};
 
         try {
             return json.execute(send).get();

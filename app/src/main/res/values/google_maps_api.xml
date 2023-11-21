@@ -1,0 +1,7 @@
+<!-- google_maps_api.xml -->
+
+<resources>
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+       AIzaSyA63OSLobgoaHVZhL0hXL_BT29zXkqcR2k
+    </string>
+</resources>
