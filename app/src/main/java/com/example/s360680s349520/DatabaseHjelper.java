@@ -55,12 +55,12 @@ public class DatabaseHjelper extends SQLiteOpenHelper {
                     URL urlen = new URL(urls[0]);
                     HttpsURLConnection conn = (HttpsURLConnection)
                             urlen.openConnection();
-                    conn.setRequestMethod(urls[2]);
+                    conn.setRequestMethod(urls[1]);
                     conn.setRequestProperty("Accept","application/json");
-                    if (urls[2].equals("POST")){
+                    if (urls[1].equals("POST")){
                         conn.setDoOutput(true);
                         try(OutputStream out = conn.getOutputStream()) {
-                            byte[] input = urls[3].getBytes(StandardCharsets.UTF_8);
+                            byte[] input = urls[2].getBytes(StandardCharsets.UTF_8);
                             out.write(input, 0, input.length);
                         }
                     }

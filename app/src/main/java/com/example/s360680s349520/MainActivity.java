@@ -38,7 +38,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         db = new DatabaseHjelper(this);
         stederList = db.listSteder();
         // Add markers to the map
-        addMarkersToMap(stederList);
+        //addMarkersToMap(stederList);
     }
 
 
@@ -61,6 +61,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        addMarkersToMap(stederList);
 
         LatLng oslo = new LatLng(59.919571, 10.735560);
         mMap.addMarker(new
