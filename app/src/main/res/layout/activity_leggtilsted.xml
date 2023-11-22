@@ -14,8 +14,8 @@
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
 
-    <TextView
-        android:id="@+id/textViewBeskrivelseValue"
+    <EditText
+        android:id="@+id/editTextBeskrivelseValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewBeskrivelse"
@@ -27,14 +27,15 @@
         android:id="@+id/textViewAdresse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewBeskrivelseValue"
+        android:layout_below="@id/editTextBeskrivelseValue"
         android:text="Adresse: "
         android:textSize="18sp"
         android:textStyle="bold"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"/>
 
-    <TextView
-        android:id="@+id/textViewAdresseValue"
+    <EditText
+        android:id="@+id/editTextAdresseValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewAdresse"
@@ -42,30 +43,71 @@
         android:textSize="16sp"
         android:layout_marginBottom="16dp"/>
 
+    <TextView
+        android:id="@+id/textViewLat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextAdresseValue"
+        android:text="Latitude "
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/textViewLatValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewLat"
+        android:text=""
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewLong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewLatValue"
+        android:text="Longitude"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/textViewLongValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewLong"
+        android:text=""
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"/>
+
     <LinearLayout
         android:id="@+id/buttonLayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewAdresseValue"
+        android:layout_below="@id/textViewLongValue"
+        android:layout_centerHorizontal="true"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/buttonYes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="Yes"
-            android:textSize="18sp"
-            android:layout_marginEnd="8dp"/>
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/buttonNo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="No"
-            android:textSize="18sp"
-            android:layout_marginStart="8dp"/>
+            android:textSize="18sp" />
 
     </LinearLayout>
 

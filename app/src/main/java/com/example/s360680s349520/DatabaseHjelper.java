@@ -23,12 +23,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class DatabaseHjelper extends SQLiteOpenHelper {
     static int DATABASE_VERSION = 1;
     private static final String DATABASE_NAVN = "s360680";
-    static String TABLE_Steder = "Steder";
-    static String KOLONNE_ID= "id";
-    static String KOLONNE_BESKRIVELSE = "beskrivelse";
-    static String KOLONNE_GATEADRESSE = "gateadresse";
-    static String KOLONNE_Lat= "gps_latitude";
-    static String KOLONNE_Long = "gps_longitude";
+
     static ArrayList<Steder> alleSteder;
 
     public DatabaseHjelper(Context context) {

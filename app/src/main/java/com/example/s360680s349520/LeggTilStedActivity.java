@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,13 +23,20 @@ import java.util.Locale;
 
 public class LeggTilStedActivity extends AppCompatActivity {
     private DatabaseHjelper db;
-    TextView textViewBeskrivelseValue;
-    TextView textViewAdresseValue;
+    Steder nyttSted = new Steder();
+    EditText editTextBeskrivelseValue;
+    EditText editTextAdresseValue;
+    TextView  textViewLatValue,textViewLongValue;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leggtilsted);
+        db = new DatabaseHjelper(this); // You need to replace this with your actual constructor
+
 
         // Retrieve LatLng from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("myPref", MODE_PRIVATE);
@@ -36,7 +45,7 @@ public class LeggTilStedActivity extends AppCompatActivity {
         Log.d("SharedPrefs recieved", "latitude: " + latitude + ", longitude: " + longitude);
 
         LatLng location = new LatLng(latitude, longitude);
-
+/*
         // ... (previous code)
 
         // Use Geocoder to get address from LatLng
@@ -68,23 +77,55 @@ public class LeggTilStedActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+*/
 
-        Steder nyttSted = new Steder();
-        nyttSted.setBeskrivelse(besk);
-        nyttSted.setGateadresse(addr);
+
+
+        //nyttSted.setBeskrivelse(besk);
+        //nyttSted.setGateadresse(addr);
         nyttSted.setLatidtude(String.valueOf(latitude));
         nyttSted.setLongitude(String.valueOf(longitude));
-        TextView textViewBeskrivelseValue = findViewById(R.id.textViewBeskrivelseValue);
-        TextView textViewAdresseValue = findViewById(R.id.textViewAdresseValue);
-        textViewBeskrivelseValue.setText(nyttSted.getBeskrivelse());
-        textViewAdresseValue.setText(nyttSted.getGateadresse());
+        EditText editTextBeskrivelseValue = findViewById(R.id.editTextBeskrivelseValue);
+        EditText editTextAdresseValue = findViewById(R.id.editTextAdresseValue);
+        TextView textViewLatValue= findViewById(R.id.textViewLatValue);
+        TextView textViewLongValue= findViewById(R.id.textViewLongValue);
+        //textViewBeskrivelseValue.setText(nyttSted.getBeskrivelse());
+        //textViewAdresseValue.setText(nyttSted.getGateadresse());
+        textViewLatValue.setText(nyttSted.getLatidtude());
+        textViewLongValue.setText(nyttSted.getLongitude());
 
-        Button buttonYes = findViewById(R.id.buttonYes);
+
         Button buttonNo = findViewById(R.id.buttonNo);
+        Button buttonYes = findViewById(R.id.buttonYes);
+
+
+        buttonNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LeggTilStedActivity.this, "You clicked No", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(LeggTilStedActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         buttonYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String besk = editTextBeskrivelseValue.getText().toString();
+                String addr = editTextAdresseValue.getText().toString();
+                nyttSted.setBeskrivelse(besk);
+                nyttSted.setGateadresse(addr);
+
+                if (besk.isEmpty() || addr.isEmpty()) {
+                    // Handle the case where besk or addr is empty (show a message or handle it accordingly)
+                    // For example, you can show a toast message
+                    Toast.makeText(LeggTilStedActivity.this, "Please enter description and address", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 // Handle "Yes" button click (e.g., add to the database)
                 db.leggTilSteder(nyttSted);
                 Intent intent = new Intent(LeggTilStedActivity.this, MainActivity.class);
@@ -92,16 +133,6 @@ public class LeggTilStedActivity extends AppCompatActivity {
                 finish(); // Close this activity and go back to MainActivity
             }
         });
-
-        buttonNo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LeggTilStedActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
 
 
 
