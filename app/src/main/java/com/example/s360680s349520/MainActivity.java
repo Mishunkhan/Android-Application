@@ -61,15 +61,16 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        addMarkersToMap(stederList);
+
 
         LatLng oslo = new LatLng(59.919571, 10.735560);
-        mMap.addMarker(new
-                MarkerOptions().position(oslo).title("Marker in Oslo"));
+        mMap.setMinZoomPreference(15);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                new LatLng(59.919571, 10.735560), 17));
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(oslo));
         if (!stederList.isEmpty()) {
-            mMap.addMarker(new
-                    MarkerOptions().position(oslo).title("Marker in Oslo"));
+            addMarkersToMap(stederList);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(oslo));
         }
     }
