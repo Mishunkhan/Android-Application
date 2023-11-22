@@ -1,7 +1,10 @@
 package com.example.s360680s349520;
 
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -16,7 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 
 
-public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MainActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     private GoogleMap mMap;
     private ActivityMainBinding binding;
@@ -49,7 +52,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 double latitude = Double.parseDouble(sted.getLatidtude());
                 double longitude = Double.parseDouble(sted.getLongitude());
                 LatLng location = new LatLng(latitude, longitude);
-                mMap.addMarker(new MarkerOptions().position(location).title(sted.getBeskrivelse()));
+                mMap.addMarker(new MarkerOptions().position(location).title(sted.getBeskrivelse())
+                        .snippet(sted.getGateadresse()));
             } catch (NumberFormatException e) {
                 // Handle parsing errors if latitude or longitude is not a valid double
                 e.printStackTrace();
@@ -62,7 +66,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-
         LatLng oslo = new LatLng(59.919571, 10.735560);
         mMap.setMinZoomPreference(15);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
@@ -73,5 +76,28 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             addMarkersToMap(stederList);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(oslo));
         }
+        mMap.setOnMapClickListener(this);
+
+
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        SharedPreferences sharedPreferences = getSharedPreferences("myPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putFloat("latitude", (float) latLng.latitude);
+        editor.putFloat("longitude", (float)latLng.longitude);
+        editor.apply();
+        Log.d("SharedPrefs sent", "Latitude: " + latLng.latitude + ", longitude : " + latLng.longitude);
+
+        // Launch another activity to add a new Steder object
+        Intent intent = new Intent(MainActivity.this, LeggTilStedActivity.class);
+        startActivity(intent);
+    }
+    public void onBackPressed() {
+        // Custom back button logic (if needed)
+        // For example, go back to a specific activity
+        finish();
     }
 }

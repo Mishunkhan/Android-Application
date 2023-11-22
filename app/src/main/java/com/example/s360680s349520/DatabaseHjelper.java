@@ -37,7 +37,28 @@ public class DatabaseHjelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        new getJson();
+       // new getJson();
+        initializeDatabase();
+    }
+
+    private void initializeDatabase() {
+        // Add code to initialize your database tables if needed
+        // ...
+
+        // Call the method to fetch data from the server
+        fetchDataFromServer();
+    }
+
+    private void fetchDataFromServer() {
+        // Execute AsyncTask to fetch data from the server
+        getJson task = new getJson();
+        String[] send = {"https://dave3600.cs.oslomet.no/~s360680/jsonut.php", "GET"};
+
+        try {
+            alleSteder = task.execute(send).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

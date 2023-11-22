@@ -15,9 +15,13 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA63OSLobgoaHVZhL0hXL_BT29zXkqcR2k" />
+
+        <activity
+            android:name=".LeggTilStedActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
