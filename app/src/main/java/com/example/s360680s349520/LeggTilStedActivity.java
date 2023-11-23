@@ -81,16 +81,12 @@ public class LeggTilStedActivity extends AppCompatActivity {
 
 
 
-        //nyttSted.setBeskrivelse(besk);
-        //nyttSted.setGateadresse(addr);
         nyttSted.setLatidtude(String.valueOf(latitude));
         nyttSted.setLongitude(String.valueOf(longitude));
         EditText editTextBeskrivelseValue = findViewById(R.id.editTextBeskrivelseValue);
         EditText editTextAdresseValue = findViewById(R.id.editTextAdresseValue);
         TextView textViewLatValue= findViewById(R.id.textViewLatValue);
         TextView textViewLongValue= findViewById(R.id.textViewLongValue);
-        //textViewBeskrivelseValue.setText(nyttSted.getBeskrivelse());
-        //textViewAdresseValue.setText(nyttSted.getGateadresse());
         textViewLatValue.setText(nyttSted.getLatidtude());
         textViewLongValue.setText(nyttSted.getLongitude());
 
@@ -121,8 +117,6 @@ public class LeggTilStedActivity extends AppCompatActivity {
                 nyttSted.setGateadresse(addr);
 
                 if (besk.isEmpty() || addr.isEmpty()) {
-                    // Handle the case where besk or addr is empty (show a message or handle it accordingly)
-                    // For example, you can show a toast message
                     Toast.makeText(LeggTilStedActivity.this, "Please enter description and address", Toast.LENGTH_SHORT).show();
                     return;
                 }

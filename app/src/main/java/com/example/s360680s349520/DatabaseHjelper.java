@@ -60,7 +60,6 @@ public class DatabaseHjelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oVer, int nVer){
     }
     private class getJson extends AsyncTask<String, Void,ArrayList<Steder>> {
-        JSONObject jsonObject;
         @Override
         protected  ArrayList<Steder> doInBackground(String... urls) {
             ArrayList <Steder> retur = new ArrayList<>();
@@ -92,14 +91,14 @@ public class DatabaseHjelper extends SQLiteOpenHelper {
                     }
                     conn.disconnect();
                     try {
-                        JSONArray mat = new JSONArray(output);
-                        for (int i = 0; i < mat.length(); i++) {
-                            JSONObject jsonobject = mat.getJSONObject(i);
-                            String id = jsonobject.getString("id");
-                            String beskrivelse = jsonobject.getString("beskrivelse");
-                            String gateadresse = jsonobject.getString("gateadresse");
-                            String latitude = jsonobject.getString("gps_latitude");
-                            String longitude = jsonobject.getString("gps_longitude");
+                        JSONArray stedd = new JSONArray(output);
+                        for (int i = 0; i < stedd.length(); i++) {
+                            JSONObject jsonget = stedd.getJSONObject(i);
+                            String id = jsonget.getString("id");
+                            String beskrivelse = jsonget.getString("beskrivelse");
+                            String gateadresse = jsonget.getString("gateadresse");
+                            String latitude = jsonget.getString("gps_latitude");
+                            String longitude = jsonget.getString("gps_longitude");
                             Steder sted= new Steder();
                             sted.setID(Integer.parseInt(id));
                             sted.setBeskrivelse(beskrivelse);
